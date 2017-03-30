@@ -23,6 +23,13 @@ export default class ResultsContainer extends React.Component {
       })
   }
 
+  handleChangePage = page => e => {
+    e.preventDefault();
+    this.setState(() => ({
+      page
+    }))
+  }
+
   render() {
     const {
       issues,
@@ -30,17 +37,27 @@ export default class ResultsContainer extends React.Component {
       limit
     } = this.state;
 
+    // If maxNoPages is 0, default to page 1.
     const maxNoPages = Math.floor(issues.length / limit) || 1;
+
+    const startIndex = page === 1 ? 0 : (page - 1) * limit;
+    const stopIndex = startIndex + limit;
+    const issuesToRender = issues.slice(startIndex,  stopIndex);
 
     return (
       <div className="container">
         <div className="row">
-          <div className="col">
-            <h1>Issues</h1>
+          <div className="col mt-2">
+            <h1 className="text-center">WhiteHouse Issues</h1>
+            <hr />
             {issues.length ? (
               <div>
-                <ResultsView issues={issues} />
-                <Pagination page={page} maxNoPages={maxNoPages} />
+                <ResultsView issues={issuesToRender} />
+                <Pagination
+                  page={page}
+                  maxNoPages={maxNoPages}
+                  onChangePage={this.handleChangePage}
+                />
               </div>
             ) : (
               <div>
