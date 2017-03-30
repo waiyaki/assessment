@@ -11,7 +11,7 @@ export default class ResultsContainer extends React.Component {
       issues: [],
       page: 1,
       limit: 10
-    }
+    };
   }
 
   componentDidMount() {
@@ -20,7 +20,7 @@ export default class ResultsContainer extends React.Component {
         this.setState(() => ({
           issues
         }))
-      })
+      });
   }
 
   handleChangePage = page => e => {
@@ -48,25 +48,29 @@ export default class ResultsContainer extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col mt-2">
-            <h1 className="text-center">WhiteHouse Issues</h1>
-            <hr />
+            <h1 className="text-center display-4">WhiteHouse Issues</h1>
             {issues.length ? (
               <div>
                 <ResultsView issues={issuesToRender} />
-                <Pagination
-                  page={page}
-                  maxNoPages={maxNoPages}
-                  onChangePage={this.handleChangePage}
-                />
+                <div className="d-flex justify-content-center">
+                  <Pagination
+                    page={page}
+                    maxNoPages={maxNoPages}
+                    onChangePage={this.handleChangePage}
+                  />
+                </div>
               </div>
             ) : (
               <div>
-                <p className="lead">There are no issues at this time.</p>
+                <hr />
+                <p className="lead text-center">
+                  There are no issues at this time.
+                </p>
               </div>
             )}
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

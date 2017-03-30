@@ -1,10 +1,15 @@
 import React from 'react';
 
-const fields = ['title', 'created_at', 'updated_at', 'closed_at']
+const fields = ['title', 'created_at', 'updated_at', 'closed_at'];
+const date_fields = ['created_at', 'updated_at', 'closed_at'];
 
 export const renderFields = (issue) => {
   return fields.map(field => {
-    const fieldData = issue[field];
+    let fieldData = issue[field];
+
+    if (date_fields.indexOf(field) > -1) {
+      fieldData = fieldData ? (new Date(fieldData)).toLocaleDateString() : fieldData;
+    }
     if (field === 'closed_at') {
       return <td key={field}>{`${fieldData ? 'Closed' : 'Open' }`}</td>
     }
@@ -14,7 +19,7 @@ export const renderFields = (issue) => {
 
 export default function ResultsView({ issues }) {
   return (
-    <table>
+    <table className="table">
       <thead>
         <tr>
           {fields.map(field => (
@@ -30,5 +35,5 @@ export default function ResultsView({ issues }) {
         ))}
       </tbody>
     </table>
-  )
+  );
 }
