@@ -6,19 +6,19 @@ export const renderFields = (issue) => {
   return fields.map(field => {
     const fieldData = issue[field];
     if (field === 'closed_at') {
-      return <td key={field}>`${fieldData ? 'Closed' : 'Open' }`</td>
+      return <td key={field}>{`${fieldData ? 'Closed' : 'Open' }`}</td>
     }
     return <td key={field}>{fieldData}</td>
   })
 }
 
-export default function ResultsView({ issues, limit, page }) {
+export default function ResultsView({ issues }) {
   return (
     <table>
       <thead>
         <tr>
           {fields.map(field => (
-            <th>{field}</th>
+            <th key={field}>{field}</th>
           ))}
         </tr>
       </thead>
