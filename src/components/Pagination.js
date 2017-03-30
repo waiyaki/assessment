@@ -4,7 +4,7 @@ export default function Pagination({page, maxNoPages, onChangePage }) {
   return (
     <nav>
       <ul className="pagination">
-        {Array.from({length: maxNoPages}, (v, i) => i++).map(pageIndex => (
+        {Array.from({length: maxNoPages}, (v, i) => i).map(pageIndex => (
           <li
             key={pageIndex}
             className={`page-item ${page === pageIndex + 1 ? 'active' : ''}`}
