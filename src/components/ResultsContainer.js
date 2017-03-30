@@ -2,6 +2,7 @@ import React from 'react';
 
 import data from './data';
 import ResultsView from './ResultsView';
+import Pagination from './Pagination';
 
 export default class ResultsContainer extends React.Component {
   constructor(props) {
@@ -19,12 +20,16 @@ export default class ResultsContainer extends React.Component {
       page,
       limit
     } = this.state;
+
+    const maxNoPages = Math.floor(issues.length / limit) || 1;
+
     return (
       <div className="container">
         <div className="row">
           <div className="col">
             <h1>Issues</h1>
-            <ResultsView issues={issues} page={page} limit={limit} />
+            <ResultsView issues={issues} />
+            <Pagination page={page} maxNoPages={maxNoPages} />
           </div>
         </div>
       </div>
