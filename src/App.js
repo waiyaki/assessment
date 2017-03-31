@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 
-import ResultsContainer from './components/ResultsContainer';
+import { Provider } from 'react-redux';
+
+import configureStore from './redux/store';
+import Issues from './components/Issues';
+
+const store = configureStore();
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <ResultsContainer />
-      </div>
+      <Provider store={store}>
+        <Issues />
+      </Provider>
     );
   }
 }
