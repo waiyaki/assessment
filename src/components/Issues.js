@@ -2,12 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { selectors } from '../redux/modules/issues/reducer';
+import {
+  fetchIssues, changeCurrentPage
+} from '../redux/modules/issues/actions';
+
 import ResultsView from './ResultsView';
 import Pagination from './Pagination';
 
 export class Issues extends React.Component {
+  componentDidMount() {
+    this.props
+      .fetchIssues('https://api.github.com/repos/WhiteHouse/petitions/issues')
+  }
+
   render() {
-    const { issues, maxNoPages, currentPage } = this.props;
+    const { issues, maxNoPages, currentPage, changeCurrentPage } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -20,7 +29,7 @@ export class Issues extends React.Component {
                   <Pagination
                     page={currentPage}
                     maxNoPages={maxNoPages}
-                    onChangePage={f => f => f}
+                    onChangePage={changeCurrentPage}
                   />
                 </div>
               </div>
@@ -45,5 +54,6 @@ export default connect(
     issues: getVisibleIssues(state),
     maxNoPages: getMaxNoPages(state),
     currentPage: getCurrentPage(state)
-  })
+  }),
+  { fetchIssues, changeCurrentPage }
 )(Issues);

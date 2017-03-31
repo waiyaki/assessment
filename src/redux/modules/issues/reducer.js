@@ -1,3 +1,5 @@
+import { actionTypes } from './actions';
+
 const INITIAL_STATE = {
   issues: [],
   currentPage: 1,
@@ -9,5 +11,18 @@ const INITIAL_STATE = {
 export { default as selectors } from './selectors';
 
 export default function reducer(state = INITIAL_STATE, action) {
-  return state;
+  switch (action.type) {
+    case actionTypes.FETCH_ISSUES_SUCCESS:
+      return Object.assign({}, state, {
+        issues: action.payload
+      });
+
+    case actionTypes.CHANGE_CURRENT_PAGE:
+      return Object.assign({}, state, {
+        currentPage: action.payload
+      });
+
+    default:
+      return state;
+  }
 }

@@ -11,7 +11,7 @@ export default function Pagination({page, maxNoPages, onChangePage }) {
           >
             <a
               className="page-link"
-              onClick={onChangePage(pageIndex + 1)}
+              onClick={() => onChangePage(pageIndex + 1)}
             >{pageIndex + 1}</a>
           </li>
         ))
