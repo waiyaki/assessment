@@ -17,4 +17,4 @@ $ yarn
 ```bash
 $ yarn start
 ```
-The application should auto-open a browser window. If it doesn't, visit [localhost:3000](localhost:3000)
+The application should auto-open a browser window. If it doesn't, visit [http://localhost:3000](http://localhost:3000)
